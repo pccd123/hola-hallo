@@ -613,30 +613,24 @@ async function loadResults() {
     try { const d = await fbGet('q'+i+'/de'); if (d && d.text) deAns = d.text; } catch(e) {}
     try { const d = await fbGet('q'+i+'/es'); if (d && d.text) esAns = d.text; } catch(e) {}
 
-    // Partnerantwort übersetzen
-    const partnerAns = lang === 'de' ? esAns : deAns;
-    let partnerTrans = null;
-    if (partnerAns) {
-      partnerTrans = await translate(partnerAns, partnerLang, lang);
-    }
-
-    const myAns     = lang === 'de' ? deAns : esAns;
-    const myFlag    = lang === 'de' ? '🇩🇪' : '🇨🇴';
-    const myName    = lang === 'de' ? 'Marco 🇩🇪' : 'Taty 🇨🇴';
-    const partName  = lang === 'de' ? 'Taty 🇨🇴' : 'Marco 🇩🇪';
+    // Beide Antworten übersetzen
+    let deTrans = null, esTrans = null;
+    if (deAns) deTrans = await translate(deAns, 'de', 'es');
+    if (esAns) esTrans = await translate(esAns, 'es', 'de');
 
     blocks.push(`
       <div class="r-block">
         <div class="r-q">${esc(lang === 'de' ? Q.de[i] : Q.es[i])}</div>
         <div class="r-pair">
           <div class="r-card">
-            <div class="r-name">${myName}</div>
-            <div class="r-ans ${myAns ? '' : 'empty'}">${esc(myAns || noAns)}</div>
+            <div class="r-name">Marco 🇩🇪</div>
+            <div class="r-ans ${deAns ? '' : 'empty'}">${esc(deAns || noAns)}</div>
+            ${deTrans ? `<div class="r-trans"><span class="r-trans-label">Español</span>${esc(deTrans)}</div>` : ''}
           </div>
           <div class="r-card">
-            <div class="r-name">${partName}</div>
-            <div class="r-ans ${partnerAns ? '' : 'empty'}">${esc(partnerAns || noAns)}</div>
-            ${partnerTrans ? `<div class="r-trans"><span class="r-trans-label">${transLabel}</span> ${esc(partnerTrans)}</div>` : ''}
+            <div class="r-name">Taty 🇨🇴</div>
+            <div class="r-ans ${esAns ? '' : 'empty'}">${esc(esAns || noAns)}</div>
+            ${esTrans ? `<div class="r-trans"><span class="r-trans-label">Deutsch</span>${esc(esTrans)}</div>` : ''}
           </div>
         </div>
       </div>
@@ -686,4 +680,3 @@ function esc(s) {
 </script>
 </body>
 </html>
-
