@@ -580,24 +580,32 @@ async function checkPartnerDone(partnerLang) {
   } catch(e) {}
 }
 
-// ── ÜBERSETZUNG ───────────────────────────────────────────────────────────────
+// ── ÜBERSETZUNG via LibreTranslate ───────────────────────────────────────────
+const LT_INSTANCES = [
+  'https://translate.argosopentech.com',
+  'https://translate.terraprint.co',
+  'https://lt.vern.cc'
+];
+
 async function translate(text, fromLang, toLang) {
-  const fromName = fromLang === 'de' ? 'German' : 'Spanish';
-  const toName   = toLang   === 'de' ? 'German' : 'Spanish';
-  try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        system: 'Translate from ' + fromName + ' to ' + toName + '. Return ONLY the translation, nothing else. Keep the personal conversational tone.',
-        messages: [{ role: 'user', content: text }]
-      })
-    });
-    const data = await r.json();
-    return data.content?.[0]?.text?.trim() || null;
-  } catch(e) { return null; }
+  for (const base of LT_INSTANCES) {
+    try {
+      const r = await fetch(base + '/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          q: text,
+          source: fromLang,
+          target: toLang,
+          format: 'text'
+        })
+      });
+      if (!r.ok) continue;
+      const data = await r.json();
+      if (data.translatedText) return data.translatedText;
+    } catch(e) { continue; }
+  }
+  return null;
 }
 
 // ── ERGEBNISSE ────────────────────────────────────────────────────────────────
