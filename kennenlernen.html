@@ -143,7 +143,7 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
   <div class="lang-eyebrow">Un juego · Ein Spiel</div>
   <div class="lang-title">Hola,<br><em>Hallo.</em></div>
   <div class="lang-divider"></div>
-  <div class="lang-sub">Zwei Personen. Zwei Sprachen. Zehn Fragen.</div>
+  <div class="lang-sub">Zwei Personen. Zwei Sprachen. Zehn Fragen.<br>Dos personas. Dos idiomas. Diez preguntas.</div>
   <div class="lang-options">
     <button class="lang-btn" onclick="chooseLang('de')">
       <span class="lang-flag">🇩🇪</span>
@@ -219,28 +219,28 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
 // ── CONTENT ──────────────────────────────────────────────────────────────────
 const Q = {
   de: [
-    "Was war der Moment diese Woche, der dich innerlich zum Lächeln gebracht hat — ohne dass es jemand gemerkt hat?",
-    "Was ist das Mutigste, das du je für jemanden getan hast — und weiß diese Person es bis heute?",
-    "Welche Version von dir zeigst du fast niemandem — und was müsste passieren damit du sie zeigst?",
-    "Was passiert in deinem Körper, wenn du jemanden wirklich anziehend findest — ganz konkret?",
-    "Was hast du im Bett noch nie gemacht — aber schon oft gedacht?",
-    "Wann warst du zuletzt so präsent mit jemandem, dass die Zeit aufgehört hat zu existieren?",
-    "Was ist dein Körper bereit zu geben, bevor dein Kopf ja sagt?",
-    "Wie klingst du, wenn du wirklich außer Kontrolle gerätst?",
-    "Was ist der Unterschied zwischen jemandem den du begehrst — und jemandem dem du dich hingibst?",
-    "Wenn dieser Austausch heute Nacht mit uns beiden enden würde — was würdest du dir wünschen?"
+    "Was ist das erste was du tust wenn du wirklich frei bist — kein Telefon, keine Pflichten, niemand der wartet?",
+    "Was ist das letzte Ding das dich wirklich überrascht hat — an dir selbst?",
+    "Welche Art von Stille magst du am meisten?",
+    "Was bringt dich dazu, jemandem zu vertrauen — ohne dass ein Wort fällt?",
+    "Was ist etwas das du dir heimlich gönnst — und dir dabei vollkommen egal ist was andere denken?",
+    "Wann hast du zuletzt etwas getan das sich falsch angefühlt hat — und sich trotzdem richtig gut angefühlt hat?",
+    "Was zieht dich zu jemandem hin — bevor du weißt warum?",
+    "Was würdest du tun wenn du weißt dass niemand je davon erfährt?",
+    "Wann hast du zuletzt gespürt dass jemand dich wirklich sieht — nicht nur anschaut?",
+    "Was wäre dein perfekter Abend — und wie endet er?"
   ],
   es: [
-    "¿Cuál fue el momento de esta semana que te hizo sonreír por dentro, sin que nadie se diera cuenta?",
-    "¿Cuál es lo más valiente que has hecho por alguien, y esa persona lo sabe todavía?",
-    "¿Qué versión de ti misma casi nunca muestras, y qué tendría que pasar para que la mostraras?",
-    "¿Qué pasa en tu cuerpo cuando encuentras a alguien realmente atractivo, en concreto?",
-    "¿Qué no has hecho nunca en la cama, pero has pensado muchas veces?",
-    "¿Cuándo fue la última vez que estuviste tan presente con alguien que el tiempo dejó de existir?",
-    "¿Qué está dispuesto a dar tu cuerpo antes de que tu cabeza diga que sí?",
-    "¿Cómo suenas cuando pierdes el control de verdad?",
-    "¿Cuál es la diferencia entre alguien a quien deseas y alguien a quien te entregas?",
-    "Si este intercambio terminara esta noche entre nosotros dos, ¿qué desearías?"
+    "¿Qué es lo primero que haces cuando eres completamente libre, sin teléfono, sin obligaciones, sin nadie esperando?",
+    "¿Cuál es la última cosa que te sorprendió de verdad, de ti misma?",
+    "¿Qué tipo de silencio te gusta más?",
+    "¿Qué hace que confíes en alguien, sin que se diga una sola palabra?",
+    "¿Qué es algo que te permites en secreto, y que te importa absolutamente nada lo que piensen los demás?",
+    "¿Cuándo fue la última vez que hiciste algo que parecía incorrecto, pero que se sintió increíblemente bien?",
+    "¿Qué te atrae de alguien antes de saber por qué?",
+    "¿Qué harías si supieras que nadie se enteraría jamás?",
+    "¿Cuándo fue la última vez que sentiste que alguien realmente te veía, no solo te miraba?",
+    "¿Cómo sería tu noche perfecta, y cómo termina?"
   ]
 };
 
@@ -486,6 +486,12 @@ async function submitAnswer() {
   note.textContent = lang === 'de' ? 'Gesendet.' : 'Enviado.';
   note.style.display = 'block';
 
+  // Übersetzung im Hintergrund speichern
+  const toLang = lang === 'de' ? 'es' : 'de';
+  translate(txt, lang, toLang).then(trans => {
+    if (trans) fbSet('q' + qIdx + '/' + lang + '_trans', trans).catch(() => {});
+  });
+
   setTimeout(() => {
     const bubble = document.getElementById('ai-bubble');
     bubble.textContent = AI[lang][qIdx];
@@ -613,10 +619,10 @@ async function loadResults() {
     try { const d = await fbGet('q'+i+'/de'); if (d && d.text) deAns = d.text; } catch(e) {}
     try { const d = await fbGet('q'+i+'/es'); if (d && d.text) esAns = d.text; } catch(e) {}
 
-    // Beide Antworten übersetzen
+    // Übersetzungen aus Firebase laden (wurden beim Absenden gespeichert)
     let deTrans = null, esTrans = null;
-    if (deAns) deTrans = await translate(deAns, 'de', 'es');
-    if (esAns) esTrans = await translate(esAns, 'es', 'de');
+    try { deTrans = await fbGet('q'+i+'/de_trans'); } catch(e) {}
+    try { esTrans = await fbGet('q'+i+'/es_trans'); } catch(e) {}
 
     blocks.push(`
       <div class="r-block">
@@ -680,3 +686,4 @@ function esc(s) {
 </script>
 </body>
 </html>
+
