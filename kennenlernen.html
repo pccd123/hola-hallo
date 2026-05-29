@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -8,349 +8,133 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #0d0a08;
-  --card: #1a1410;
-  --amber: #c8922a;
-  --amber-light: #e8b86d;
-  --ember: #9b3a2a;
-  --ember-light: #c4613a;
-  --cream: #f0e6d3;
-  --mid: #8a7560;
-  --soft: #3a2e22;
-  --ai: #b8956a;
-  --green: #2d6e4e;
+  --bg: #0d0a08; --card: #1a1410;
+  --amber: #c8922a; --amber-light: #e8b86d;
+  --ember: #9b3a2a; --ember-light: #c4613a;
+  --cream: #f0e6d3; --mid: #8a7560;
+  --soft: #3a2e22; --ai: #b8956a; --green: #2d6e4e;
 }
-
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--cream);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--bg); color: var(--cream);
+  min-height: 100vh; display: flex;
+  flex-direction: column; align-items: center;
   overflow-x: hidden;
 }
-
 body::after {
-  content: '';
-  position: fixed;
-  top: -30vh; left: 50%;
-  transform: translateX(-50%);
+  content: ''; position: fixed;
+  top: -30vh; left: 50%; transform: translateX(-50%);
   width: 80vw; height: 60vh;
   background: radial-gradient(ellipse, rgba(200,146,42,0.06) 0%, transparent 70%);
   pointer-events: none; z-index: 0;
 }
-
-/* ── PAGES ── */
-.page {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  width: 100%; min-height: 100vh;
-  position: relative; z-index: 1;
-}
+.page { display: none; flex-direction: column; align-items: center; width: 100%; min-height: 100vh; position: relative; z-index: 1; }
 .page.active { display: flex; }
 
-/* ── PAGE: LANG ── */
-#page-lang {
-  justify-content: center;
-  padding: 2rem;
-  text-align: center;
-}
-.lang-eyebrow {
-  font-size: 0.7rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--amber);
-  margin-bottom: 1.5rem;
-  animation: fadeUp 0.8s ease 0.3s both;
-}
-.lang-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 10vw, 5.5rem);
-  font-weight: 300; line-height: 1.05;
-  margin-bottom: 0.5rem;
-  animation: fadeUp 0.8s ease 0.5s both;
-}
+/* LANG */
+#page-lang { justify-content: center; padding: 2rem; text-align: center; }
+.lang-eyebrow { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem; animation: fadeUp 0.8s ease 0.3s both; }
+.lang-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,10vw,5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 0.5rem; animation: fadeUp 0.8s ease 0.5s both; }
 .lang-title em { font-style: italic; color: var(--amber-light); }
-.lang-divider {
-  width: 40px; height: 1px; background: var(--amber);
-  margin: 1.5rem auto;
-  animation: fadeUp 0.8s ease 0.7s both;
-}
-.lang-sub {
-  font-size: 0.85rem; color: var(--mid);
-  margin-bottom: 3rem; line-height: 1.7;
-  animation: fadeUp 0.8s ease 0.9s both;
-}
-.lang-options {
-  display: flex; gap: 1rem;
-  flex-wrap: wrap; justify-content: center;
-  animation: fadeUp 0.8s ease 1.1s both;
-}
-.lang-btn {
-  background: transparent;
-  border: 1px solid rgba(200,146,42,0.3);
-  border-radius: 12px; padding: 1.5rem 2rem;
-  cursor: pointer; transition: all 0.3s;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 0.4rem; min-width: 150px;
-}
+.lang-divider { width: 40px; height: 1px; background: var(--amber); margin: 1.5rem auto; animation: fadeUp 0.8s ease 0.7s both; }
+.lang-sub { font-size: 0.85rem; color: var(--mid); margin-bottom: 3rem; line-height: 1.7; animation: fadeUp 0.8s ease 0.9s both; }
+.lang-options { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.8s ease 1.1s both; }
+.lang-btn { background: transparent; border: 1px solid rgba(200,146,42,0.3); border-radius: 12px; padding: 1.5rem 2rem; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; min-width: 150px; }
 .lang-btn:hover { border-color: var(--amber); transform: translateY(-2px); }
 .lang-flag { font-size: 2.2rem; }
 .lang-label { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--cream); }
 .lang-native { font-size: 0.75rem; color: var(--mid); }
 
-/* ── PAGE: INTRO ── */
-#page-intro {
-  justify-content: center;
-  padding: 3rem 2rem;
-  text-align: center;
-  overflow-y: auto;
-}
+/* INTRO */
+#page-intro { justify-content: center; padding: 3rem 2rem; text-align: center; overflow-y: auto; }
 .intro-wrap { max-width: 520px; width: 100%; }
-.intro-persona {
-  font-size: 0.7rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--amber);
-  margin-bottom: 2rem;
-}
-.intro-message {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
-  font-weight: 300; line-height: 1.85;
-  color: var(--cream); margin-bottom: 2.5rem;
-}
+.intro-persona { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 2rem; }
+.intro-message { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem,3.5vw,1.45rem); font-weight: 300; line-height: 1.85; color: var(--cream); margin-bottom: 2.5rem; }
 .intro-message em { color: var(--amber-light); font-style: italic; }
-.begin-btn {
-  background: transparent; border: 1px solid var(--amber);
-  color: var(--amber); border-radius: 10px;
-  padding: 0.8rem 2.5rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem; letter-spacing: 0.1em;
-  text-transform: uppercase; cursor: pointer;
-  transition: all 0.3s; margin-bottom: 2rem;
-}
+.begin-btn { background: transparent; border: 1px solid var(--amber); color: var(--amber); border-radius: 10px; padding: 0.8rem 2.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; margin-bottom: 2rem; }
 .begin-btn:hover { background: var(--amber); color: var(--bg); }
 
-/* ── PAGE: GAME ── */
+/* GAME */
 #page-game { padding: 2rem 1.5rem 5rem; max-width: 580px; }
-
-.game-top {
-  width: 100%; display: flex;
-  align-items: center; justify-content: space-between;
-  margin-bottom: 3rem; padding-top: 0.5rem;
-}
+.game-top { width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; padding-top: 0.5rem; }
 .game-name { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); }
 .progress-track { display: flex; gap: 5px; }
-.pip {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--soft); transition: all 0.4s;
-}
+.pip { width: 6px; height: 6px; border-radius: 50%; background: var(--soft); transition: all 0.4s; }
 .pip.done { background: var(--amber); }
 .pip.active { background: var(--amber-light); transform: scale(1.4); }
 .game-partner { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--mid); }
-
-.share-bar {
-  width: 100%; background: var(--card);
-  border-radius: 12px; padding: 1rem 1.2rem;
-  display: flex; align-items: center; gap: 0.8rem;
-  border: 1px solid var(--soft); margin-bottom: 2rem;
-}
+.share-bar { width: 100%; background: var(--card); border-radius: 12px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; border: 1px solid var(--soft); margin-bottom: 2rem; }
 .share-bar-text { flex: 1; font-size: 0.78rem; color: var(--mid); line-height: 1.5; }
 .share-bar-text strong { color: var(--cream); display: block; margin-bottom: 0.2rem; }
-.copy-btn {
-  background: transparent; border: 1px solid var(--amber);
-  color: var(--amber); border-radius: 8px;
-  padding: 0.5rem 1rem; font-size: 0.75rem;
-  cursor: pointer; white-space: nowrap; transition: all 0.2s;
-}
+.copy-btn { background: transparent; border: 1px solid var(--amber); color: var(--amber); border-radius: 8px; padding: 0.5rem 1rem; font-size: 0.75rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
 .copy-btn:hover { background: var(--amber); color: var(--bg); }
 .copy-btn.ok { background: var(--green); border-color: var(--green); color: white; }
-
-.q-num {
-  font-size: 0.65rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--ember-light);
-  margin-bottom: 1.2rem; width: 100%;
-}
-.q-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.4rem, 4.5vw, 1.9rem);
-  font-weight: 300; line-height: 1.5;
-  color: var(--cream); margin-bottom: 2rem; width: 100%;
-  min-height: 4rem;
-}
-.ans-label {
-  font-size: 0.65rem; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--mid);
-  margin-bottom: 0.6rem; width: 100%;
-}
-textarea {
-  width: 100%; background: var(--card);
-  border: 1px solid rgba(200,146,42,0.15);
-  border-radius: 12px; padding: 1rem 1.2rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-  color: var(--cream); resize: none; min-height: 100px;
-  transition: border-color 0.3s; outline: none; line-height: 1.6;
-}
+.q-num { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-light); margin-bottom: 1.2rem; width: 100%; }
+.q-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem,4.5vw,1.9rem); font-weight: 300; line-height: 1.5; color: var(--cream); margin-bottom: 2rem; width: 100%; min-height: 4rem; }
+.ans-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; width: 100%; }
+textarea { width: 100%; background: var(--card); border: 1px solid rgba(200,146,42,0.15); border-radius: 12px; padding: 1rem 1.2rem; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--cream); resize: none; min-height: 100px; transition: border-color 0.3s; outline: none; line-height: 1.6; }
 textarea:focus { border-color: rgba(200,146,42,0.4); }
 textarea::placeholder { color: rgba(138,117,96,0.5); }
 textarea:disabled { opacity: 0.4; cursor: not-allowed; }
-
-.send-btn {
-  width: 100%; background: transparent;
-  border: 1px solid rgba(200,146,42,0.4);
-  color: var(--amber); border-radius: 12px; padding: 0.9rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-  letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s;
-  margin-top: 0.8rem;
-}
+.send-btn { width: 100%; background: transparent; border: 1px solid rgba(200,146,42,0.4); color: var(--amber); border-radius: 12px; padding: 0.9rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s; margin-top: 0.8rem; }
 .send-btn:hover:not(:disabled) { background: var(--amber); color: var(--bg); }
 .send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-.sent-note {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 0.95rem;
-  color: var(--mid); margin-top: 1rem; width: 100%;
-  text-align: center;
-}
-
-.ai-bubble {
-  width: 100%; margin-top: 1.5rem;
-  padding: 0 0 0 1rem;
-  border-left: 1px solid rgba(200,146,42,0.3);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; font-style: italic;
-  color: var(--ai); line-height: 1.6;
-  opacity: 0; transition: opacity 0.8s ease;
-}
+.sent-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem; color: var(--mid); margin-top: 1rem; width: 100%; text-align: center; display: none; }
+.ai-bubble { width: 100%; margin-top: 1.5rem; padding: 0 0 0 1rem; border-left: 1px solid rgba(200,146,42,0.3); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--ai); line-height: 1.6; opacity: 0; transition: opacity 0.8s ease; }
 .ai-bubble.show { opacity: 1; }
-
-.next-btn {
-  width: 100%; background: transparent;
-  border: 1px solid rgba(200,146,42,0.3);
-  color: var(--amber-light); border-radius: 12px; padding: 0.9rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-  letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s;
-  margin-top: 1rem; display: none;
-}
+.next-btn { width: 100%; background: transparent; border: 1px solid rgba(200,146,42,0.3); color: var(--amber-light); border-radius: 12px; padding: 0.9rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s; margin-top: 1rem; display: none; }
 .next-btn:hover { border-color: var(--amber); color: var(--amber); }
 
-/* ── PAGE: WAITING ── */
-#page-waiting {
-  justify-content: center; text-align: center; padding: 3rem 2rem;
-}
+/* WAITING */
+#page-waiting { justify-content: center; text-align: center; padding: 3rem 2rem; }
 .wait-flame { font-size: 2.5rem; margin-bottom: 1.5rem; animation: flicker 2s ease-in-out infinite; }
 @keyframes flicker { 0%,100%{opacity:0.7;transform:scale(1);} 50%{opacity:1;transform:scale(1.05);} }
 .wait-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 1rem; }
 .wait-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.7; max-width: 320px; }
 .wait-dots { display: flex; gap: 6px; justify-content: center; margin-top: 2rem; }
-.wait-dots span {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--amber); animation: pdot 1.4s ease-in-out infinite;
-}
+.wait-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); animation: pdot 1.4s ease-in-out infinite; }
 .wait-dots span:nth-child(2) { animation-delay: 0.2s; }
 .wait-dots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes pdot { 0%,100%{opacity:0.2;transform:scale(0.8);} 50%{opacity:1;transform:scale(1.2);} }
 
-/* ── PAGE: EASTER ── */
-#page-easter {
-  justify-content: center; text-align: center; padding: 3rem 2rem;
-  overflow-y: auto;
-}
-#page-easter::before {
-  content: '';
-  position: fixed; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(155,58,42,0.12) 0%, transparent 70%);
-  pointer-events: none;
-  animation: eglow 3s ease-in-out infinite;
-}
+/* EASTER */
+#page-easter { justify-content: center; text-align: center; padding: 3rem 2rem; overflow-y: auto; }
+#page-easter::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at center, rgba(155,58,42,0.12) 0%, transparent 70%); pointer-events: none; animation: eglow 3s ease-in-out infinite; }
 @keyframes eglow { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
 .easter-wrap { max-width: 480px; width: 100%; }
-.easter-eye {
-  font-size: 0.65rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--ember-light);
-  margin-bottom: 1.5rem;
-  animation: fadeUp 1s ease 0.5s both;
-}
-.easter-txt {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.1rem, 3.5vw, 1.35rem);
-  font-weight: 300; line-height: 1.9; color: var(--cream);
-  animation: fadeUp 1s ease 1s both;
-}
+.easter-eye { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-light); margin-bottom: 1.5rem; animation: fadeUp 1s ease 0.5s both; }
+.easter-txt { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem,3.5vw,1.35rem); font-weight: 300; line-height: 1.9; color: var(--cream); animation: fadeUp 1s ease 1s both; }
 .easter-txt em { color: var(--amber-light); font-style: italic; }
-.easter-btn {
-  margin-top: 2.5rem; background: transparent;
-  border: 1px solid var(--ember); color: var(--ember-light);
-  border-radius: 10px; padding: 0.8rem 2rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.3s;
-  animation: fadeUp 1s ease 2s both;
-}
+.easter-btn { margin-top: 2.5rem; background: transparent; border: 1px solid var(--ember); color: var(--ember-light); border-radius: 10px; padding: 0.8rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; animation: fadeUp 1s ease 2s both; }
 .easter-btn:hover { background: var(--ember); color: var(--cream); }
 
-/* ── PAGE: RESULTS ── */
+/* RESULTS */
 #page-results { padding: 3rem 1.5rem 6rem; max-width: 620px; }
-
 .results-hd { text-align: center; margin-bottom: 3rem; width: 100%; }
-.results-eye {
-  font-size: 0.65rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--amber); margin-bottom: 1rem;
-}
-.results-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 6vw, 3rem); font-weight: 300; line-height: 1.2;
-}
-
+.results-eye { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+.results-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,6vw,3rem); font-weight: 300; line-height: 1.2; }
 .r-block { width: 100%; margin-bottom: 2.5rem; }
-.r-q {
-  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
-  font-style: italic; color: var(--amber-light);
-  margin-bottom: 1rem; padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--soft);
-}
+.r-q { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--amber-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--soft); }
 .r-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .r-card { background: var(--card); border-radius: 10px; padding: 1rem; border: 1px solid var(--soft); }
 .r-name { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.5rem; }
-.r-ans {
-  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
-  font-weight: 300; line-height: 1.6; color: var(--cream);
-}
+.r-ans { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 300; line-height: 1.6; color: var(--cream); }
 .r-ans.empty { color: var(--soft); font-style: italic; }
-
-.copy-results {
-  width: 100%; background: transparent;
-  border: 1px solid rgba(200,146,42,0.3); color: var(--amber);
-  border-radius: 10px; padding: 0.8rem 2rem;
-  font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
-  letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s;
-  margin-top: 1rem;
-}
+.copy-results { width: 100%; background: transparent; border: 1px solid rgba(200,146,42,0.3); color: var(--amber); border-radius: 10px; padding: 0.8rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s; margin-top: 1rem; }
 .copy-results:hover { background: var(--amber); color: var(--bg); }
 
-/* ── UTILS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
 .ldots { display: inline-flex; gap: 3px; align-items: center; }
-.ldots span {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: currentColor; opacity: 0.6;
-  animation: blink 1.2s ease-in-out infinite;
-}
+.ldots span { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: 0.6; animation: blink 1.2s ease-in-out infinite; }
 .ldots span:nth-child(2) { animation-delay: 0.2s; }
 .ldots span:nth-child(3) { animation-delay: 0.4s; }
 @keyframes blink { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
-
 @media (max-width: 480px) { .r-pair { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1: SPRACHE WÄHLEN -->
 <div id="page-lang" class="page active">
   <div class="lang-eyebrow">Un juego · Ein Spiel</div>
   <div class="lang-title">Hola,<br><em>Hallo.</em></div>
@@ -370,7 +154,6 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
   </div>
 </div>
 
-<!-- PAGE 2: PERSÖNLICHE EINLEITUNG -->
 <div id="page-intro" class="page">
   <div class="intro-wrap">
     <div class="intro-persona" id="intro-persona"></div>
@@ -379,25 +162,23 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
   </div>
 </div>
 
-<!-- PAGE 3: SPIEL -->
 <div id="page-game" class="page">
   <div class="game-top">
     <div class="game-name" id="game-name"></div>
     <div class="progress-track" id="progress-track"></div>
     <div class="game-partner" id="game-partner"></div>
   </div>
-  <div id="share-bar"></div>
+  <div id="share-bar-wrap"></div>
   <div class="q-num" id="q-num"></div>
   <div class="q-text" id="q-text"></div>
   <div class="ans-label" id="ans-label"></div>
   <textarea id="ans-input" rows="4"></textarea>
   <button class="send-btn" id="send-btn" onclick="submitAnswer()"></button>
-  <div class="sent-note" id="sent-note" style="display:none"></div>
+  <div class="sent-note" id="sent-note"></div>
   <div class="ai-bubble" id="ai-bubble"></div>
-  <button class="next-btn" id="next-btn" onclick="nextQ()"></button>
+  <button class="next-btn" id="next-btn"></button>
 </div>
 
-<!-- PAGE 4: WARTEN -->
 <div id="page-waiting" class="page">
   <div class="wait-flame">🕯️</div>
   <div class="wait-title" id="wait-title"></div>
@@ -405,7 +186,6 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
   <div class="wait-dots"><span></span><span></span><span></span></div>
 </div>
 
-<!-- PAGE 5: EASTER EGG (nur Taty) -->
 <div id="page-easter" class="page">
   <div class="easter-wrap">
     <div class="easter-eye">// mensaje privado</div>
@@ -416,11 +196,10 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
       Y lo que he observado es esto: hay una razón por la que quería conocerte así, despacio, pregunta por pregunta. No de cualquier manera. <em>De esta manera.</em><br><br>
       No te lo digo para presionarte. Te lo digo porque me pareció justo.
     </div>
-    <button class="easter-btn" onclick="goPage('page-results'); loadResults()">Ver las respuestas →</button>
+    <button class="easter-btn" id="easter-btn" onclick="afterEaster()">Ver las respuestas →</button>
   </div>
 </div>
 
-<!-- PAGE 6: ERGEBNISSE -->
 <div id="page-results" class="page">
   <div class="results-hd">
     <div class="results-eye" id="results-eye"></div>
@@ -431,7 +210,7 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
 </div>
 
 <script>
-// ── FRAGEN ───────────────────────────────────────────────────────────────────
+// ── CONTENT ──────────────────────────────────────────────────────────────────
 const Q = {
   de: [
     "Was war der Moment diese Woche, der dich innerlich zum Lächeln gebracht hat — ohne dass es jemand gemerkt hat?",
@@ -491,28 +270,20 @@ const AI = {
   ]
 };
 
-// ── CONFIG ───────────────────────────────────────────────────────────────────
-const FB = 'https://jvhjnk-43dea-default-rtdb.firebaseio.com';
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+const FB    = 'https://jvhjnk-43dea-default-rtdb.firebaseio.com';
 const TOTAL = 10;
-const POLL = 3000;
+const POLL  = 3000;
 
-// ── STATE ────────────────────────────────────────────────────────────────────
-let lang = null;
-let sid = null;
-let qIdx = 0;
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let lang      = null;   // 'de' | 'es'
+let sid       = null;   // session id from URL hash
+let qIdx      = 0;      // current question index
 let pollTimer = null;
 
-// ── NAVIGATION ───────────────────────────────────────────────────────────────
-function goPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-// ── FIREBASE ─────────────────────────────────────────────────────────────────
+// ── FIREBASE ──────────────────────────────────────────────────────────────────
 async function fbSet(path, val) {
-  const url = FB + '/s/' + sid + '/' + path + '.json';
-  const r = await fetch(url, {
+  const r = await fetch(FB + '/s/' + sid + '/' + path + '.json', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(val)
@@ -522,58 +293,137 @@ async function fbSet(path, val) {
 }
 
 async function fbGet(path) {
-  const url = FB + '/s/' + sid + '/' + path + '.json';
-  const r = await fetch(url);
+  const r = await fetch(FB + '/s/' + sid + '/' + path + '.json');
   if (!r.ok) throw new Error('FB read ' + r.status);
-  return r.json(); // returns null if not set
+  return r.json(); // null if not set
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('load', async () => {
+  // 1. Session-ID aus URL lesen oder neu generieren
   const params = new URLSearchParams(location.hash.replace('#', ''));
   sid = params.get('sid');
   if (!sid) {
     sid = Math.random().toString(36).substr(2, 9);
     location.hash = 'sid=' + sid;
   }
+
+  // 2. Sprachauswahl zeigen — beim Neustart immer
+  // (Fortschritt wird nach Sprachwahl geprüft)
 });
 
-// ── LANGUAGE CHOICE ───────────────────────────────────────────────────────────
-function chooseLang(l) {
+// ── SPRACHE WÄHLEN ────────────────────────────────────────────────────────────
+async function chooseLang(l) {
   lang = l;
+
+  // Prüfe Fortschritt in Firebase
+  try {
+    const deDone = await fbGet('done/de');
+    const esDone = await fbGet('done/es');
+
+    // Beide fertig → direkt zu Ergebnissen
+    if (deDone && esDone) {
+      if (lang === 'es' && !esDone) {
+        goPage('page-easter');
+        return;
+      }
+      goPage('page-results');
+      loadResults();
+      return;
+    }
+
+    // Ich bin bereits fertig, warte auf Partner
+    const myDone = lang === 'de' ? deDone : esDone;
+    if (myDone) {
+      if (lang === 'es') {
+        // Taty fertig → Easter Egg zeigen, dann auf Marco warten
+        goPage('page-easter');
+        document.getElementById('easter-btn').onclick = () => {
+          goWaiting();
+        };
+      } else {
+        goWaiting();
+      }
+      return;
+    }
+
+    // Prüfe wie weit ich bin (letzte beantwortete Frage)
+    let resumeIdx = 0;
+    for (let i = TOTAL - 1; i >= 0; i--) {
+      const ans = await fbGet('q' + i + '/' + lang);
+      if (ans && ans.text) { resumeIdx = i + 1; break; }
+    }
+
+    // Wenn alle Fragen beantwortet aber done-Flag fehlt → setzen
+    if (resumeIdx >= TOTAL) {
+      await fbSet('done/' + lang, 1);
+      if (lang === 'es') {
+        goPage('page-easter');
+        document.getElementById('easter-btn').onclick = () => goWaiting();
+      } else {
+        goWaiting();
+      }
+      return;
+    }
+
+    // Intro zeigen, dann zum richtigen Einstiegspunkt
+    qIdx = resumeIdx;
+    showIntro(resumeIdx);
+
+  } catch(e) {
+    // Firebase-Fehler → trotzdem starten
+    qIdx = 0;
+    showIntro(0);
+  }
+}
+
+function showIntro(startIdx) {
   document.getElementById('intro-persona').textContent = lang === 'de' ? '— für Marco —' : '— para Taty —';
   document.getElementById('intro-message').innerHTML = INTROS[lang];
-  document.getElementById('begin-btn').textContent = lang === 'de' ? 'Ich bin bereit' : 'Estoy lista';
+  const btn = document.getElementById('begin-btn');
+  btn.textContent = lang === 'de' ? 'Ich bin bereit' : 'Estoy lista';
+  if (startIdx > 0) {
+    // Weitermachen statt neu starten
+    btn.textContent = lang === 'de'
+      ? 'Weitermachen (Frage ' + (startIdx + 1) + ')'
+      : 'Continuar (Pregunta ' + (startIdx + 1) + ')';
+  }
+  btn.onclick = goGame;
   goPage('page-intro');
 }
 
-// ── START GAME ────────────────────────────────────────────────────────────────
+// ── SPIEL STARTEN ─────────────────────────────────────────────────────────────
 function goGame() {
-  document.getElementById('game-name').textContent = lang === 'de' ? '🇩🇪 Marco' : '🇨🇴 Taty';
+  document.getElementById('game-name').textContent    = lang === 'de' ? '🇩🇪 Marco' : '🇨🇴 Taty';
   document.getElementById('game-partner').textContent = lang === 'de' ? 'Taty 🇨🇴' : 'Marco 🇩🇪';
 
-  // Share bar
-  const url = location.href;
+  const url   = location.href;
   const label = lang === 'de' ? 'Link für Taty:' : 'Enlace para Marco:';
-  const btnLabel = lang === 'de' ? 'Kopieren' : 'Copiar';
-  document.getElementById('share-bar').innerHTML = `
+  const copy  = lang === 'de' ? 'Kopieren' : 'Copiar';
+  document.getElementById('share-bar-wrap').innerHTML = `
     <div class="share-bar">
       <div class="share-bar-text">
         <strong>${label}</strong>
         ${url.length > 44 ? url.slice(0,44)+'…' : url}
       </div>
-      <button class="copy-btn" id="copy-link" onclick="copyLink()">${btnLabel}</button>
+      <button class="copy-btn" id="copy-link" onclick="copyLink()">${copy}</button>
     </div>
   `;
 
-  qIdx = 0;
   loadQ();
   goPage('page-game');
 }
 
-// ── QUESTION ──────────────────────────────────────────────────────────────────
+// ── FRAGE LADEN ───────────────────────────────────────────────────────────────
 function loadQ() {
-  // Progress
+  // Progress dots
   const track = document.getElementById('progress-track');
   track.innerHTML = '';
   for (let i = 0; i < TOTAL; i++) {
@@ -585,7 +435,7 @@ function loadQ() {
   document.getElementById('q-num').textContent =
     lang === 'de' ? `Frage ${qIdx+1} von ${TOTAL}` : `Pregunta ${qIdx+1} de ${TOTAL}`;
 
-  // Typewriter
+  // Typewriter effect
   const el = document.getElementById('q-text');
   el.textContent = '';
   const txt = Q[lang][qIdx];
@@ -604,14 +454,12 @@ function loadQ() {
   btn.style.display = '';
 
   document.getElementById('sent-note').style.display = 'none';
-
   const bubble = document.getElementById('ai-bubble');
   bubble.textContent = ''; bubble.classList.remove('show');
-
   document.getElementById('next-btn').style.display = 'none';
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────────────────────
+// ── ANTWORT SENDEN ────────────────────────────────────────────────────────────
 async function submitAnswer() {
   const txt = document.getElementById('ans-input').value.trim();
   if (!txt) return;
@@ -624,7 +472,6 @@ async function submitAnswer() {
   try {
     await fbSet('q' + qIdx + '/' + lang, { text: txt, ts: Date.now() });
   } catch(e) {
-    console.error('Submit error:', e);
     btn.disabled = false;
     btn.style.display = '';
     btn.textContent = lang === 'de' ? 'Senden' : 'Enviar';
@@ -637,7 +484,6 @@ async function submitAnswer() {
   note.textContent = lang === 'de' ? 'Gesendet.' : 'Enviado.';
   note.style.display = 'block';
 
-  // AI comment
   setTimeout(() => {
     const bubble = document.getElementById('ai-bubble');
     bubble.textContent = AI[lang][qIdx];
@@ -646,27 +492,50 @@ async function submitAnswer() {
     setTimeout(() => {
       const nb = document.getElementById('next-btn');
       nb.style.display = 'block';
+
       if (qIdx < TOTAL - 1) {
         nb.textContent = lang === 'de' ? 'Nächste Frage →' : 'Siguiente pregunta →';
         nb.onclick = nextQ;
       } else {
         nb.textContent = lang === 'de' ? 'Fertig →' : 'Listo →';
-        nb.onclick = finish;
+        nb.onclick = finishGame;
       }
     }, 800);
   }, 600);
 }
 
-// ── NEXT ─────────────────────────────────────────────────────────────────────
+// ── NÄCHSTE FRAGE ─────────────────────────────────────────────────────────────
 function nextQ() {
   qIdx++;
   loadQ();
   window.scrollTo(0, 0);
 }
 
-// ── FINISH ────────────────────────────────────────────────────────────────────
-async function finish() {
-  goPage('page-waiting');
+// ── FERTIG ────────────────────────────────────────────────────────────────────
+async function finishGame() {
+  // Done-Flag setzen
+  try { await fbSet('done/' + lang, 1); } catch(e) {}
+
+  if (lang === 'es') {
+    // Taty: direkt Easter Egg
+    goPage('page-easter');
+    document.getElementById('easter-btn').onclick = () => goWaiting();
+  } else {
+    // Marco: auf Taty warten
+    goWaiting();
+  }
+}
+
+// ── EASTER EGG → danach ───────────────────────────────────────────────────────
+function afterEaster() {
+  goWaiting();
+}
+
+// ── WARTEN ────────────────────────────────────────────────────────────────────
+function goWaiting() {
+  clearInterval(pollTimer);
+
+  const partnerLang = lang === 'de' ? 'es' : 'de';
 
   document.getElementById('wait-title').textContent =
     lang === 'de' ? 'Warten auf Taty…' : 'Esperando a Marco…';
@@ -675,90 +544,61 @@ async function finish() {
       ? 'Du hast alle Fragen beantwortet. Sobald Taty fertig ist, seht ihr beide die Antworten.'
       : 'Ya respondiste todo. En cuanto Marco termine, verán las respuestas juntos.';
 
-  // Eigene Seite als fertig markieren
-  try { await fbSet('done/' + lang, 1); } catch(e) { console.error('done write:', e); }
+  goPage('page-waiting');
 
   // Sofort prüfen, dann pollen
-  checkDone();
-  pollTimer = setInterval(checkDone, POLL);
+  checkPartnerDone(partnerLang);
+  pollTimer = setInterval(() => checkPartnerDone(partnerLang), POLL);
 }
 
-// ── CHECK DONE ────────────────────────────────────────────────────────────────
-function dbg(msg) {
-  let el = document.getElementById('dbg');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'dbg';
-    el.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:12px monospace;padding:8px;z-index:9999;max-height:120px;overflow-y:auto;';
-    document.body.appendChild(el);
-  }
-  el.innerHTML += msg + '<br>';
-}
-
-async function checkDone() {
+// ── PARTNER FERTIG? ───────────────────────────────────────────────────────────
+async function checkPartnerDone(partnerLang) {
   try {
-    let de = await fbGet('done/de');
-    let es = await fbGet('done/es');
+    // Prüfe done-Flag
+    let partnerDone = await fbGet('done/' + partnerLang);
 
-    // Fallback: Prüfe ob alle Fragen beantwortet wurden (auch wenn done-Flag fehlt)
-    if (!de) {
-      const lastQ = await fbGet('q9/de');
-      if (lastQ && lastQ.text) { de = 1; dbg('de Fallback via q9'); }
-    }
-    if (!es) {
-      const lastQ = await fbGet('q9/es');
-      if (lastQ && lastQ.text) { es = 1; dbg('es Fallback via q9'); }
+    // Fallback: Prüfe ob letzte Frage beantwortet
+    if (!partnerDone) {
+      const lastQ = await fbGet('q' + (TOTAL-1) + '/' + partnerLang);
+      if (lastQ && lastQ.text) partnerDone = 1;
     }
 
-    dbg('de=' + JSON.stringify(de) + ' es=' + JSON.stringify(es) + ' lang=' + lang);
-
-    if (de && es) {
+    if (partnerDone) {
       clearInterval(pollTimer);
-      dbg('BEIDE FERTIG → ' + (lang === 'es' ? 'easter' : 'results'));
-      if (lang === 'es') {
-        goPage('page-easter');
-      } else {
-        goPage('page-results');
-        loadResults();
-      }
+      goPage('page-results');
+      loadResults();
     }
-  } catch(e) {
-    dbg('FEHLER: ' + e.message);
-  }
+  } catch(e) {}
 }
 
-// ── RESULTS ───────────────────────────────────────────────────────────────────
+// ── ERGEBNISSE ────────────────────────────────────────────────────────────────
 async function loadResults() {
-  document.getElementById('results-eye').textContent =
-    lang === 'de' ? 'Das seid ihr beide.' : 'Así son los dos.';
-  document.getElementById('results-title').textContent =
-    lang === 'de' ? 'Eure Antworten.' : 'Sus respuestas.';
-  document.getElementById('copy-results-btn').textContent =
-    lang === 'de' ? 'Antworten kopieren' : 'Copiar respuestas';
+  document.getElementById('results-eye').textContent   = lang === 'de' ? 'Das seid ihr beide.' : 'Así son los dos.';
+  document.getElementById('results-title').textContent = lang === 'de' ? 'Eure Antworten.' : 'Sus respuestas.';
+  document.getElementById('copy-results-btn').textContent = lang === 'de' ? 'Antworten kopieren' : 'Copiar respuestas';
 
   const list = document.getElementById('results-list');
   list.innerHTML = '<div style="color:var(--mid);text-align:center;padding:2rem;font-style:italic">Lade…</div>';
 
   const blocks = [];
-  for (let i = 0; i < TOTAL; i++) {
-    let deAns = '—', esAns = '—';
-    try { const d = await fbGet('q' + i + '/de'); if (d && d.text) deAns = d.text; } catch(e) {}
-    try { const d = await fbGet('q' + i + '/es'); if (d && d.text) esAns = d.text; } catch(e) {}
+  const noAns  = lang === 'de' ? 'Noch keine Antwort' : 'Sin respuesta aún';
 
-    const q = lang === 'de' ? Q.de[i] : Q.es[i];
-    const noAns = lang === 'de' ? 'Noch keine Antwort' : 'Sin respuesta aún';
+  for (let i = 0; i < TOTAL; i++) {
+    let deAns = null, esAns = null;
+    try { const d = await fbGet('q'+i+'/de'); if (d && d.text) deAns = d.text; } catch(e) {}
+    try { const d = await fbGet('q'+i+'/es'); if (d && d.text) esAns = d.text; } catch(e) {}
 
     blocks.push(`
       <div class="r-block">
-        <div class="r-q">${esc(q)}</div>
+        <div class="r-q">${esc(lang === 'de' ? Q.de[i] : Q.es[i])}</div>
         <div class="r-pair">
           <div class="r-card">
             <div class="r-name">Marco 🇩🇪</div>
-            <div class="r-ans ${deAns === '—' ? 'empty' : ''}">${esc(deAns === '—' ? noAns : deAns)}</div>
+            <div class="r-ans ${deAns ? '' : 'empty'}">${esc(deAns || noAns)}</div>
           </div>
           <div class="r-card">
             <div class="r-name">Taty 🇨🇴</div>
-            <div class="r-ans ${esAns === '—' ? 'empty' : ''}">${esc(esAns === '—' ? noAns : esAns)}</div>
+            <div class="r-ans ${esAns ? '' : 'empty'}">${esc(esAns || noAns)}</div>
           </div>
         </div>
       </div>
@@ -771,29 +611,27 @@ async function copyResults() {
   let txt = lang === 'de' ? 'Marco & Taty\n\n' : 'Marco y Taty\n\n';
   for (let i = 0; i < TOTAL; i++) {
     txt += (i+1) + '. ' + Q[lang][i] + '\n';
-    try { const d = await fbGet('q'+i+'/de'); txt += 'Marco: ' + (d && d.text ? d.text : '—') + '\n'; } catch(e) { txt += 'Marco: —\n'; }
-    try { const d = await fbGet('q'+i+'/es'); txt += 'Taty: '  + (d && d.text ? d.text : '—') + '\n'; } catch(e) { txt += 'Taty: —\n';  }
+    try { const d = await fbGet('q'+i+'/de'); txt += 'Marco: '+(d&&d.text?d.text:'—')+'\n'; } catch(e) { txt+='Marco: —\n'; }
+    try { const d = await fbGet('q'+i+'/es'); txt += 'Taty: ' +(d&&d.text?d.text:'—')+'\n'; } catch(e) { txt+='Taty: —\n';  }
     txt += '\n';
   }
   try {
     await navigator.clipboard.writeText(txt);
     const b = document.getElementById('copy-results-btn');
-    b.textContent = '✓ ' + (lang === 'de' ? 'Kopiert' : 'Copiado');
-    setTimeout(() => { b.textContent = lang === 'de' ? 'Antworten kopieren' : 'Copiar respuestas'; }, 2000);
+    b.textContent = '✓ '+(lang==='de'?'Kopiert':'Copiado');
+    setTimeout(()=>{ b.textContent = lang==='de'?'Antworten kopieren':'Copiar respuestas'; }, 2000);
   } catch(e) {}
 }
 
-// ── COPY LINK ─────────────────────────────────────────────────────────────────
 async function copyLink() {
   const btn = document.getElementById('copy-link');
   try {
     await navigator.clipboard.writeText(location.href);
     btn.textContent = '✓'; btn.classList.add('ok');
-    setTimeout(() => { btn.textContent = lang === 'de' ? 'Kopieren' : 'Copiar'; btn.classList.remove('ok'); }, 2000);
+    setTimeout(()=>{ btn.textContent=lang==='de'?'Kopieren':'Copiar'; btn.classList.remove('ok'); }, 2000);
   } catch(e) { prompt('Link:', location.href); }
 }
 
-// ── UTILS ─────────────────────────────────────────────────────────────────────
 function esc(s) {
   return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
