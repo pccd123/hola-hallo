@@ -157,7 +157,7 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
     </button>
   </div>
   <button class="reset-btn" onclick="resetSession()">↺ Session zurücksetzen</button>
-  <div style="color:var(--soft);font-size:0.6rem;letter-spacing:0.15em;margin-top:0.8rem;">v1.0</div>
+  <div style="color:var(--soft);font-size:0.6rem;letter-spacing:0.15em;margin-top:0.8rem;">v1.1</div>
 </div>
 
 <div id="page-intro" class="page">
@@ -580,32 +580,20 @@ async function checkPartnerDone(partnerLang) {
   } catch(e) {}
 }
 
-// ── ÜBERSETZUNG via LibreTranslate ───────────────────────────────────────────
-const LT_INSTANCES = [
-  'https://translate.argosopentech.com',
-  'https://translate.terraprint.co',
-  'https://lt.vern.cc'
-];
-
+// ── ÜBERSETZUNG via MyMemory ─────────────────────────────────────────────────
 async function translate(text, fromLang, toLang) {
-  for (const base of LT_INSTANCES) {
-    try {
-      const r = await fetch(base + '/translate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          q: text,
-          source: fromLang,
-          target: toLang,
-          format: 'text'
-        })
-      });
-      if (!r.ok) continue;
-      const data = await r.json();
-      if (data.translatedText) return data.translatedText;
-    } catch(e) { continue; }
-  }
-  return null;
+  try {
+    const langpair = fromLang + '|' + toLang;
+    const url = 'https://api.mymemory.translated.net/get?q=' +
+      encodeURIComponent(text) + '&langpair=' + encodeURIComponent(langpair);
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (data.responseStatus === 200 && data.responseData?.translatedText) {
+      return data.responseData.translatedText;
+    }
+    return null;
+  } catch(e) { return null; }
 }
 
 // ── ERGEBNISSE ────────────────────────────────────────────────────────────────
