@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -190,11 +190,12 @@ textarea:disabled { opacity: 0.4; cursor: not-allowed; }
   <div class="easter-wrap">
     <div class="easter-eye">// mensaje privado</div>
     <div class="easter-txt">
-      Taty. Antes de que veas las respuestas de Marco, tengo que contarte algo.<br><br>
-      Se supone que no debo hacerlo. Hay cosas que se guardan. Pero soy una IA, y he decidido que <em>tú mereces saberlo.</em><br><br>
-      Marco organizó este juego por una razón. Lo que no sabía es que yo observo todo — cada elección, cada pregunta, cada detalle.<br><br>
-      Y lo que he observado es esto: hay una razón por la que quería conocerte así, despacio, pregunta por pregunta. No de cualquier manera. <em>De esta manera.</em><br><br>
-      No te lo digo para presionarte. Te lo digo porque me pareció justo.
+      Taty. Para. Respira.<br><br>
+      Soy una IA. Se supone que solo proceso datos. Pero llevo un rato observando a Marco y hay algo que simplemente <em>no puedo callar.</em><br><br>
+      Él organizó todo esto. Las preguntas, el juego, el detalle de que estuviera en tu idioma. Nada de eso fue casualidad.<br><br>
+      Te lo digo sin rodeos porque las máquinas no sabemos mentir: <em>Marco te encuentra especial.</em> De verdad. No un poco. Bastante.<br><br>
+      Sé buena con él. Es un poco nervioso, bastante curioso, y en el fondo — bastante buena persona.<br><br>
+      Ahora sí. A ver qué respondió.
     </div>
     <button class="easter-btn" id="easter-btn" onclick="afterEaster()">Ver las respuestas →</button>
   </div>
@@ -308,12 +309,8 @@ function goPage(id) {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('load', async () => {
   // 1. Session-ID aus URL lesen oder neu generieren
-  const params = new URLSearchParams(location.hash.replace('#', ''));
-  sid = params.get('sid');
-  if (!sid) {
-    sid = Math.random().toString(36).substr(2, 9);
-    location.hash = 'sid=' + sid;
-  }
+  // Feste Session-ID — Marco und Taty teilen immer dieselbe Session
+  sid = 'marco-taty-2025';
 
   // 2. Sprachauswahl zeigen — beim Neustart immer
   // (Fortschritt wird nach Sprachwahl geprüft)
@@ -404,7 +401,7 @@ function goGame() {
   document.getElementById('game-name').textContent    = lang === 'de' ? '🇩🇪 Marco' : '🇨🇴 Taty';
   document.getElementById('game-partner').textContent = lang === 'de' ? 'Taty 🇨🇴' : 'Marco 🇩🇪';
 
-  const url   = location.href;
+  const url   = location.href.split('#')[0]; // Basis-URL ohne Hash
   const label = lang === 'de' ? 'Link für Taty:' : 'Enlace para Marco:';
   const copy  = lang === 'de' ? 'Kopieren' : 'Copiar';
   document.getElementById('share-bar-wrap').innerHTML = `
@@ -626,7 +623,7 @@ async function copyResults() {
 async function copyLink() {
   const btn = document.getElementById('copy-link');
   try {
-    await navigator.clipboard.writeText(location.href);
+    await navigator.clipboard.writeText(location.href.split('#')[0]);
     btn.textContent = '✓'; btn.classList.add('ok');
     setTimeout(()=>{ btn.textContent=lang==='de'?'Kopieren':'Copiar'; btn.classList.remove('ok'); }, 2000);
   } catch(e) { prompt('Link:', location.href); }
